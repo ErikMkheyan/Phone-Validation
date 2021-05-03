@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/itil-tel-input/15.0.0/css/intleTelInput.min.css">
+    <style>
+        .iti-flag {
+            background-image:url("img/flags.png");
+        }
+        @media (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+            .iti-flag {
+                background-image: url("img/flags@2x.png");
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" href="css/intlTelInput.css">
+</head>
+<body>
+<form>
+    <label>Telephone Input</label>
+    <br>
+    <input type="tel" id="phone" name="full_phone">
+    <span id="valid-msg" class="hide">Valid</span>
+    <span id="error-msg" class="hide"></span>
+    <button type="submit">Submit</button>
+</form>
+<script src="js/intlTelInput.min.js">
+</script>
+<script>
+    var input = document.querySelector('#phone');
+    var validMsg = document.querySelector('#valid-msg');
+    var errorMsg = document.querySelector('#error-msg');
+    var countryData = window.intlTelInputGlobals.getCountryData();
+    var addressDropdown = document.querySelector('#address-country');
+    var errorMap = ["Invalid number" , "Invalid country code" , "Too Short" , "Too Long" , "Invalid Number"];
+    var iti = window.intlTelInput(
+        input,{
+            initialCountry:'id',
+            nationalMode:true,
+            utilsScript:"js/utils.js",
+            hiddenInput:'full_phone',
+        });
+    var reset = function () {
+        input.classList.remove("error");
+        errorMsg.innerHTML = "";
+        errorMsg.classList.add("hide");
+        validMsg.classList.add("hide");
+    }
+    input.addEventListener("change", reset);
+    input.addEventListener("key" , reset);
+</script>
+</body>
+</html>
